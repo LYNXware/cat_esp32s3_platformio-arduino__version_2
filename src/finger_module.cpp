@@ -9,17 +9,22 @@ const byte inPin_f[4] = {45, 48, 47, 21};  //declaring inputs pins for finger bu
 const byte outPin_f_count = 6;
 const byte inPin_f_count = 4;
 
+
+byte fo;
+byte fi;
+byte f_index;
+
+
                         // u1  u2  u3  u4  u5  u6     
 const byte f_map[4][6] = {{ 6,  3, 10, 14, 17, 19},   // j1      // button layout for left side
                           { 5,  2,  9, 13, 16, 18},   // j2 
                           { 4,  1,  8, 12, 15, 99},   // j3 
                           {42,  0,  7, 11, 99, 99}};  // j4      // case 99 will never happen
 
-
-byte fo;
-byte fi;
-byte f_index;
-
+bool f_state[4][6] = {{0, 0, 0, 0, 0, 0},
+                      {0, 0, 0, 0, 0, 0},
+                      {0, 0, 0, 0, 0, 0},
+                      {0, 0, 0, 0, 0, 0}};
 
 
 
@@ -45,13 +50,19 @@ void Finger_Module::read_keystate() {
 
             f_index = f_map[fi][fo];
 
-            if (digitalRead(inPin_f[fi]) == LOW){
+            if (digitalRead(inPin_f[fi]) == LOW && f_state[fi][fo] == 0){
                 
-                Serial.println(f_index);     
                 // Event.actuate(f_index);  //function from events.h file
+                f_state[fi][fo] = 1;
+                Serial.println(f_index); 
+            }
+            else if (digitalRead(inPin_f[fi]) == HIGH && f_state[fi][fo] == 1){
+                // Event.deactuate(f_index); 
+                f_state[fi][fo] = 0;
+                Serial.println("release"); 
             }
             else {     
-                // Event.deactuate(f_index);  //function from events.h file    
+                //  //function from events.h file    
             }
         }      
         digitalWrite(outPin_f[fo],HIGH);              //setting the Outputpin back to HIGH 
