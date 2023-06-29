@@ -4,28 +4,30 @@
 #include <Arduino.h>
 
 
-
-
 class Layouts_Manager {
 
     public:
 
+        String incoming_raw_layouts = "empty";
 
-        String incoming_bytes = "empty";
         String events_array[4][46];
 
         float mouse_factor[4][2];
 
         // this functlon is checküng if the LYNXapp is sending the layouts via SerialComms
-        void get_layouts();
-        
-        void split(String in_bytes);
-        
-        void mouse_speed();
+        // if yes, it will save the layouts in the preferences (espressif library)
+        void get_layouts(String variant);
 
-    private:
-    
+        // this function is loading the layouts from the preferences (espressif library)
+        void load_layouts();
         
+    private:
+
+        // this function is splitting the incoming raw layouts into the events_array
+        void split_raw_layouts();
+        
+        // this function is calculating the mouse speed factor
+        void adjust_mouse_speed();
 
 };
 
