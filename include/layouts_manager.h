@@ -31,7 +31,6 @@ class Layouts_Manager {
 
 };
 
-
-
+extern Layouts_Manager layouts_manager;
 
 #endif

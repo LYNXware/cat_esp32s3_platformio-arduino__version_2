@@ -14,6 +14,6 @@ class Finger_Module {
 };
 
 
-
+extern Finger_Module fingerModule;
 
 #endif

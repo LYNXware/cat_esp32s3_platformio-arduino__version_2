@@ -1,5 +1,7 @@
 #include "thumb_module.h"
 
+#include "events.h"
+
 const byte outPin[3] = {6, 5, 4};         //declaring inputs and outputs tor thumb buttons moudule
 const byte inPin[4] = {7, 15, 16, 17};    
 const byte outPin_count = 3;
@@ -45,11 +47,11 @@ void Thumb_Module::read_keystate() {
             if (digitalRead(inPin[ti]) == LOW && t_state[ti][to] == 0){
                 
                 Serial.println(t_index);     
-                // Event.actuate(t_index);  //function from events.h File
+                event.actuate(t_index);  //function from events.h File
                 t_state[ti][to] = 1;
             }
             else if (digitalRead(inPin[ti]) == HIGH && t_state[ti][to] == 1){
-                // Event.deactuate(t_index);  //function from events.h File
+                event.deactuate(t_index);  //function from events.h File
                 t_state[ti][to] = 0;
                 Serial.println("release"); 
             }
@@ -65,4 +67,5 @@ void Thumb_Module::read_keystate() {
 
 
   
+Thumb_Module thumbModule;
 

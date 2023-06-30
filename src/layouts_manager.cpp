@@ -82,3 +82,6 @@ void Layouts_Manager::load_layouts(){
     preferences.end();
     split_raw_layouts();
 }
+
+
+Layouts_Manager layouts_manager;

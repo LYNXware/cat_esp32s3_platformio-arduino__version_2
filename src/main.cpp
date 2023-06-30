@@ -9,21 +9,17 @@ Remark:
 
 // module to define the cat variant
 #include "config.h"
-Config config;
 
 // module to manage the layouts
 #include "layouts_manager.h"
-Layouts_Manager layouts_manager;
 
 // module to check the finger keys
 #include "finger_module.h"
-Finger_Module fingerModule;
 
 // module to check the thumb keys
 #include "thumb_module.h"
-Thumb_Module thumbModule;
 
-
+#include "events.h"
 
 
 String t = "abcdefghijk";
@@ -49,6 +45,11 @@ void setup() {
 
 
   Serial.begin(115200);
+
+  Keyboard.begin();
+  Mouse.begin();
+
+
 
   //test buton
   pinMode(pI, INPUT_PULLUP);

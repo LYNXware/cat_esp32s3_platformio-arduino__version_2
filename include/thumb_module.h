@@ -14,6 +14,6 @@ class Thumb_Module {
 };
 
 
-
+extern Thumb_Module thumbModule;
 
 #endif

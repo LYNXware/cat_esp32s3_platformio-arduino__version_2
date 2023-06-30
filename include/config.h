@@ -27,5 +27,6 @@ class Config {
 };
 
 
+extern Config config;
 
 #endif

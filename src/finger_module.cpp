@@ -1,5 +1,8 @@
 #include "finger_module.h"
 
+#include "events.h"
+
+
                         // u1  u2  u3  u4  u5  u6
 const byte outPin_f[6] = {42, 41, 40, 39, 38, 37}; //declaring output pins for finger buttons moudule
 
@@ -52,12 +55,12 @@ void Finger_Module::read_keystate() {
 
             if (digitalRead(inPin_f[fi]) == LOW && f_state[fi][fo] == 0){
                 
-                // Event.actuate(f_index);  //function from events.h file
+                event.actuate(f_index);  //function from events.h file
                 f_state[fi][fo] = 1;
                 Serial.println(f_index); 
             }
             else if (digitalRead(inPin_f[fi]) == HIGH && f_state[fi][fo] == 1){
-                // Event.deactuate(f_index); 
+                event.deactuate(f_index); 
                 f_state[fi][fo] = 0;
                 Serial.println("release"); 
             }
@@ -68,3 +71,5 @@ void Finger_Module::read_keystate() {
         digitalWrite(outPin_f[fo],HIGH);              //setting the Outputpin back to HIGH 
     }
 }
+
+Finger_Module fingerModule;

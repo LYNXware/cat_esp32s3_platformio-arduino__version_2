@@ -11,34 +11,36 @@
 void Config::set_variant() {      
 
     #if side == 0
-    variant.setCharAt(1,'L');
+        variant.setCharAt(1,'L');
     #elif side == 1
-    variant.setCharAt(1,'R');
+        variant.setCharAt(1,'R');
     #endif
 
 
     #if thumb_module == 0
-    variant.setCharAt(3,'B');
+        variant.setCharAt(3,'B');
     #elif thumb_module == 1
-    variant.setCharAt(3,'J');
-    variant.setCharAt(4,'B');
+        variant.setCharAt(3,'J');
+        variant.setCharAt(4,'B');
     #elif thumb_module == 2
-    variant.setCharAt(3,'T');
+        variant.setCharAt(3,'T');
     #endif
 
 
     #if finger_module == 0
-    variant.setCharAt(7,'B');     
+        variant.setCharAt(7,'B');     
     #elif finger_module == 1
-    variant.setCharAt(7,'B');
-    variant.setCharAt(8,'W');
+        variant.setCharAt(7,'B');
+        variant.setCharAt(8,'W');
     #endif
 
     
     #if additional_modules == 0
-//            variant.setCharAt(11,'0');
+           variant.setCharAt(11,'0');
     #elif additional_modules == 1
-    variant.setCharAt(11,'M');
+        variant.setCharAt(11,'M');
     #endif    
         
 }
+
+Config config;
