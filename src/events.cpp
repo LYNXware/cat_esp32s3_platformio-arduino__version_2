@@ -4,86 +4,43 @@
 #include "layer_control.h"
 
 
+// from the USBHIDKeyboard library
+KeyReport key_report;
 
 
-
-
-
-    
 
 void Event::actuate(byte event){
     
     passing_event = layouts_manager.events_array[layer_control.active_layer][event];
    
-    // Serial.println(event);  
-    Serial.println("-actuate");
-    Serial.println(passing_event); 
-
     if (passing_event[0] == mouse_function){
-
-        // Serial.println("mouse");
-
         mouse_press(passing_event[1]);
     }
-
     else if (passing_event[0] == cat_function){
-
-        // Serial.println("cat");
-        // Serial.println(byte(passing_event[1]));
-
         layer_control.switch_layer(passing_event[1]);
     }      
-
     else{
-
         keyboard_press(passing_event);
-
-        // pel = passing_event.length();
-        // for(k=0; k < pel; k++){ 
-        //     event_component = passing_event[k];
-        //     Keyboard.press(event_component);
-
-        //     Serial.println("---actuate"); 
-        //     Serial.println(event_component); 
-        //     Serial.println(int(event_component));
-        // }
     }  
 }
 
 
 
 void Event::deactuate(byte event){
-        
-    Serial.println("*deactuate");
 
     passing_event = layouts_manager.events_array[layer_control.active_layer][event];
     
     if (passing_event[0] == mouse_function){
-
         mouse_release(passing_event[1]);
     }
-
     else if (passing_event[0] == cat_function){
-
-        // switching back to the previous layer if the event was held
         layer_control.switch_layer_back(passing_event[1]);
-
-        // Serial.println("release cat");
     }    
     else{
-
         keyboard_release(passing_event);
-
-        // pel = passing_event.length();
-        // for(k=0; k < pel; k++){ 
-        //     event_component = passing_event[k];
-        //     Keyboard.release(event_component);
-
-        //     Serial.println("***deactuate"); 
-        //     Serial.println(event_component);
-        // }
     } 
 }
+
 
 
 void Event::keyboard_press(String passingEvent){
@@ -92,14 +49,30 @@ void Event::keyboard_press(String passingEvent){
 
     for(k=0; k < pel; k++){ 
 
-        event_component = passing_event[k];
-        Keyboard.press(event_component);
+        switch (passing_event[k]){
 
-        Serial.println("---actuate"); 
-        Serial.println(event_component); 
-        Serial.println(int(event_component));
+            case 0x81:
+
+                Serial.println("0x81");
+
+                key_report.modifiers |= 2;
+                Keyboard.sendReport(&key_report);
+                break;
+            
+            default:
+
+                event_component = passing_event[k];
+                Keyboard.press(event_component);
+
+                Serial.println("---actuate"); 
+                Serial.println(event_component); 
+                Serial.println(int(event_component), HEX);
+
+                break;
+            }
     }
 }
+
 
 
 void Event::keyboard_release(String passingEvent){
@@ -107,14 +80,60 @@ void Event::keyboard_release(String passingEvent){
     pel = passing_event.length();
 
     for(k=0; k < pel; k++){ 
-        event_component = passing_event[k];
-        Keyboard.release(event_component);
 
-        Serial.println("***deactuate"); 
-        Serial.println(event_component);
+        switch (passing_event[k]){
+
+            case 0x81:
+
+                Serial.println("**0x81");
+
+                key_report.modifiers = 0;
+                Keyboard.sendReport(&key_report);
+                break;
+            
+            default:
+
+                event_component = passing_event[k];
+                Keyboard.release(event_component);
+
+                Serial.println("***deactuate"); 
+                Serial.println(event_component);
+
+                break;
+        }
     }
-    
 }
+
+
+// void Event::keyboard_press(String passingEvent){
+
+//     pel = passing_event.length();
+
+//     for(k=0; k < pel; k++){ 
+
+//         event_component = passing_event[k];
+//         Keyboard.press(event_component);
+
+//         Serial.println("---actuate"); 
+//         Serial.println(event_component); 
+//         Serial.println(int(event_component));
+//     }
+// }
+
+
+// void Event::keyboard_release(String passingEvent){
+
+//     pel = passing_event.length();
+
+//     for(k=0; k < pel; k++){ 
+//         event_component = passing_event[k];
+//         Keyboard.release(event_component);
+
+//         Serial.println("***deactuate"); 
+//         Serial.println(event_component);
+//     }
+    
+// }
 
 
 
