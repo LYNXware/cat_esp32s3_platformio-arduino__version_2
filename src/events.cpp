@@ -64,7 +64,7 @@ void Event::deactuate(byte event){
     if (passing_event[0] == cat_function){
 
         // switching back to the previous layer if the event was held
-        layer_control.switch_layer_back();
+        layer_control.switch_layer_back(passing_event[1]);
 
         // Serial.println("release cat");
     }

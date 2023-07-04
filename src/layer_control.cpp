@@ -35,10 +35,14 @@ void Layer_Control::initialize(){
 
 void Layer_Control::switch_layer(char c){
 
-    // Serial.print("switch_layer---");
+    Serial.print("switch_layer---");
     // Serial.println(byte(c),HEX);
     // Serial.println(c,HEX);
-    previous_layer = active_layer;
+    // previous_layer = active_layer;
+
+    press_start = millis();
+    Serial.println(press_start);
+
 
     if (c == major_minor){
 
@@ -95,9 +99,18 @@ void Layer_Control::switch_layer(char c){
 }
 
 
-void Layer_Control::switch_layer_back(){
+void Layer_Control::switch_layer_back(char c){
+    
+    // press_start value is set in switch_layer function
+    hold_time = millis() - press_start;
 
+    Serial.print("switch_layer_back  hold_time---");
+    Serial.println(hold_time);
 
+    // switches back to previous layer if key is pressed for min_hold_time
+    if (hold_time > min_hold_time){        
+        switch_layer(c);
+    }
 }
 
 

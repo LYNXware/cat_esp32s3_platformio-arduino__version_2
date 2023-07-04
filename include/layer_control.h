@@ -16,7 +16,7 @@ class Layer_Control {
         // function to switch the layers
         void switch_layer(char c);
 
-        void switch_layer_back();
+        void switch_layer_back(char c);
 
 
     private:
@@ -32,8 +32,11 @@ class Layer_Control {
         const char main_sub = 0xfc;
 
         // variables for switch_layer_back function
-        byte previous_layer;
-        const int min_lod_time = 100;
+        // byte previous_layer;
+        unsigned long press_start;
+        unsigned long hold_time;
+
+        const int min_hold_time = 500;
 
         //switch the leds on or off
         void switch_led(bool blue, bool red1, bool green, bool red2);
