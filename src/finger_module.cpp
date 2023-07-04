@@ -55,8 +55,8 @@ void Finger_Module::read_keystate() {
 
             if (digitalRead(inPin_f[fi]) == LOW && f_state[fi][fo] == 0){
                 
-                Serial.println("-pressed");
-                Serial.println(f_index); 
+                // Serial.println("-pressed");
+                // Serial.println(f_index); 
 
                 event.actuate(f_index);  //function from events.h file
                 f_state[fi][fo] = 1;
@@ -67,7 +67,7 @@ void Finger_Module::read_keystate() {
                 event.deactuate(f_index); 
                 f_state[fi][fo] = 0;
                 
-                Serial.println("*release");  
+                // Serial.println("*release");  
             }
             else {     
                 //  //function from events.h file    

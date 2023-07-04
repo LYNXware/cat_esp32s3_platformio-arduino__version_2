@@ -4,8 +4,7 @@
 #include "layer_control.h"
 
 
-// from the USBHIDKeyboard library
-KeyReport key_report;
+
 
 
 
@@ -206,3 +205,7 @@ Event event;
 
 USBHIDKeyboard Keyboard;
 USBHIDMouse Mouse;
+
+
+// from the USBHIDKeyboard library
+KeyReport key_report;

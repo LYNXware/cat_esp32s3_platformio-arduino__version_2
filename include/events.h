@@ -40,6 +40,8 @@ class Event {
 extern USBHIDKeyboard Keyboard;
 extern USBHIDMouse Mouse;
 
+extern KeyReport key_report;
+
 extern Event event;
 
 
