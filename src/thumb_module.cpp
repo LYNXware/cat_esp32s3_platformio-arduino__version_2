@@ -46,14 +46,18 @@ void Thumb_Module::read_keystate() {
 
             if (digitalRead(inPin[ti]) == LOW && t_state[ti][to] == 0){
                 
-                Serial.println(t_index);     
+                Serial.println("-pressed");
+                Serial.println(t_index);                                  
+
                 event.actuate(t_index);  //function from events.h File
                 t_state[ti][to] = 1;
             }
             else if (digitalRead(inPin[ti]) == HIGH && t_state[ti][to] == 1){
+                
                 event.deactuate(t_index);  //function from events.h File
                 t_state[ti][to] = 0;
-                Serial.println("release"); 
+                
+                Serial.println("*release"); 
             }
             else {
                 // Event.deactuate(t_index);  //function from events.h File
