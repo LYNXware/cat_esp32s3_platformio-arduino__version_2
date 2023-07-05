@@ -26,6 +26,8 @@ Remark:
 // module to control the scroll wheel
 #include "scroll-wheel.h"
 
+// module to control the mouse sensor
+#include "mouse-sensor.h"
 
 // module for the execution of the events
 #include "events.h"
@@ -61,6 +63,7 @@ void setup() {
   fingerModule.initialize();
   thumbModule.initialize();
   scroll_wheel.initialize();
+  adns5050.initialize();
 
 
   Serial.begin(115200);
@@ -89,11 +92,12 @@ void loop() {
   fingerModule.read_keystate();
   thumbModule.read_keystate();
   scroll_wheel.read_incoder();
+  adns5050.read_mouse_sendor();
 
 
 
 
-
+  //test buton
   bRead = digitalRead(pI);
   if (bRead == 0) {
     
@@ -104,7 +108,4 @@ void loop() {
     // Serial.println(layouts_manager.events_array[0][0]);
   }
 
-  // Serial.println("-loop");
-  // delay(50);
-
-}
+}//end loop
