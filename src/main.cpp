@@ -22,6 +22,11 @@ Remark:
 // module to check the thumb events
 #include "thumb_module.h"
 
+
+// module to control the scroll wheel
+#include "scroll-wheel.h"
+
+
 // module for the execution of the events
 #include "events.h"
 
@@ -41,7 +46,7 @@ int bRead;
 
 
 void setup() {
-
+  
   // setting up the cat variant for the communication with the LYNXapp
   config.set_variant();
 
@@ -52,9 +57,10 @@ void setup() {
   layouts_manager.load_layouts();
 
 
-
+  // initialize the modules
   fingerModule.initialize();
   thumbModule.initialize();
+  scroll_wheel.initialize();
 
 
   Serial.begin(115200);
@@ -76,12 +82,13 @@ void setup() {
 void loop() {
 
 
-
+  // checking if the LYNXapp is connected and sends new layouts
   layouts_manager.get_layouts(config.variant);
-  // layouts_manager.get_layouts(t);
-
+  
+  // checking if any events are triggered
   fingerModule.read_keystate();
   thumbModule.read_keystate();
+  scroll_wheel.read_incoder();
 
 
 

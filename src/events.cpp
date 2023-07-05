@@ -142,6 +142,16 @@ void Event::keyboard_release(String passingEvent){
             case 0x85: // 0x85 is the right shift key
                 Keyboard._keyReport.modifiers &= ~32;
                 Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+            
+            case 0x86: // 0x86 is the right alt key
+                Keyboard._keyReport.modifiers &= ~64;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+
+            case 0x87: // 0x87 is the right GUI/super key
+                Keyboard._keyReport.modifiers &= ~128;
+                Keyboard.sendReport(&Keyboard._keyReport);
                 break;    
 
 
