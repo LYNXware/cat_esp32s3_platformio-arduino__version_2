@@ -50,14 +50,46 @@ void Event::keyboard_press(String passingEvent){
 
         switch (passing_event[k]){
 
-            case 0x81:
+            case 0x80: // 0x80 is the left control key
+                Keyboard._keyReport.modifiers |= 1;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
 
-                Serial.println("0x81");
+            case 0x81: // 0x81 is the left shift key
+                Keyboard._keyReport.modifiers |= 2;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
 
-                key_report.modifiers |= 2;
-                Keyboard.sendReport(&key_report);
+            case 0x82: // 0x82 is the left alt key
+                Keyboard._keyReport.modifiers |= 4;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;    
+
+            case 0x83: // 0x83 is the left GUI/super key
+                Keyboard._keyReport.modifiers |= 8;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+
+            case 0x84: // 0x84 is the right control key
+                Keyboard._keyReport.modifiers |= 16;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+
+            case 0x85: // 0x85 is the right shift key
+                Keyboard._keyReport.modifiers |= 32;
+                Keyboard.sendReport(&Keyboard._keyReport);
                 break;
             
+            case 0x86: // 0x86 is the right alt key
+                Keyboard._keyReport.modifiers |= 64;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+
+            case 0x87: // 0x87 is the right GUI/super key
+                Keyboard._keyReport.modifiers |= 128;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+
             default:
 
                 event_component = passing_event[k];
@@ -82,14 +114,37 @@ void Event::keyboard_release(String passingEvent){
 
         switch (passing_event[k]){
 
-            case 0x81:
-
-                Serial.println("**0x81");
-
-                key_report.modifiers = 0;
-                Keyboard.sendReport(&key_report);
+            case 0x80: // 0x80 is the left control key
+                Keyboard._keyReport.modifiers &= ~1;
+                Keyboard.sendReport(&Keyboard._keyReport);
                 break;
+
+            case 0x81: // 0x81 is the left shift key
+                Keyboard._keyReport.modifiers &= ~2;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+
+            case 0x82: // 0x82 is the left alt key
+                Keyboard._keyReport.modifiers &= ~4;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+
+            case 0x83: // 0x83 is the left GUI/super key
+                Keyboard._keyReport.modifiers &= ~8;
+                Keyboard.sendReport(&Keyboard._keyReport);;
+                break; 
             
+            case 0x84: // 0x84 is the right control key
+                Keyboard._keyReport.modifiers &= ~16;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;
+
+            case 0x85: // 0x85 is the right shift key
+                Keyboard._keyReport.modifiers &= ~32;
+                Keyboard.sendReport(&Keyboard._keyReport);
+                break;    
+
+
             default:
 
                 event_component = passing_event[k];
@@ -208,4 +263,4 @@ USBHIDMouse Mouse;
 
 
 // from the USBHIDKeyboard library
-KeyReport key_report;
+// KeyReport key_report;
