@@ -23,6 +23,7 @@ class ADNS5050  {
 
 
     private:
+
         //pins conections
         #define SCLK                14
         #define SDIO                13

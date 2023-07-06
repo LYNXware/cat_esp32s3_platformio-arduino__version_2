@@ -16,7 +16,7 @@ void Scroll_Wheel::initialize(){
 
 
 
-void Scroll_Wheel::read_incoder(){
+void Scroll_Wheel::read_encoder(){
 
     state = digitalRead(encoder_a);
         

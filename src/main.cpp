@@ -29,6 +29,9 @@ Remark:
 // module to control the mouse sensor
 #include "mouse-sensor.h"
 
+// module to control the joystick
+#include "joystick.h"
+
 // module for the execution of the events
 #include "events.h"
 
@@ -63,8 +66,12 @@ void setup() {
   fingerModule.initialize();
   thumbModule.initialize();
   scroll_wheel.initialize();
-  adns5050.initialize();
+  joystick.initialize();
 
+  
+#if additional_modules == 1  
+  adns5050.initialize();
+#endif
 
   Serial.begin(115200);
 
@@ -91,8 +98,15 @@ void loop() {
   // checking if any events are triggered
   fingerModule.read_keystate();
   thumbModule.read_keystate();
-  scroll_wheel.read_incoder();
+  scroll_wheel.read_encoder();
+  joystick.read_joystick();
+
+  
+  // runs only if in config.h the additional_modules is set to 1
+#if additional_modules == 1  
+  // checking if the mouse sensor is triggered
   adns5050.read_mouse_sendor();
+#endif
 
 
 

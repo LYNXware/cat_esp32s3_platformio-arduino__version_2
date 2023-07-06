@@ -11,7 +11,7 @@ class Scroll_Wheel {
     public:
     
         void initialize();
-        void read_incoder();
+        void read_encoder();
 
     private:
 

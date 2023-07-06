@@ -20,6 +20,7 @@ void Event::actuate(byte event){
     }      
     else{
         keyboard_press(passing_event);
+        delay(80);
     }  
 }
 

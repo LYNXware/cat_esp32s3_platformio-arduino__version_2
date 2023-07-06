@@ -54,8 +54,6 @@ void ADNS5050::read_mouse_sendor() {
         
         
         
-        
-        
 int  ADNS5050::convert(byte twoscomp){
     int value;
 
@@ -72,7 +70,6 @@ int  ADNS5050::convert(byte twoscomp){
 
 
 
-
 void ADNS5050::sync() {
     digitalWrite(NCS, LOW);
     delayMicroseconds(2);
@@ -80,9 +77,7 @@ void ADNS5050::sync() {
 }
         
         
-        
-        
-        
+         
 void ADNS5050::ADNS_write(unsigned char addr, unsigned char data) {
     char temp;
     int n;
@@ -167,9 +162,6 @@ byte ADNS5050::ADNS_read(unsigned char addr) {
 }
 
 
-
-        
-        
 void ADNS5050::pixelGrab(){
     int grabCount = 0; 
     while( grabCount < NUM_PIXELS )
