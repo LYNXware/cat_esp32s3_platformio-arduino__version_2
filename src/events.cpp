@@ -96,9 +96,9 @@ void Event::keyboard_press(String passingEvent){
                 event_component = passing_event[k];
                 Keyboard.press(event_component);
 
-                Serial.println("---actuate"); 
-                Serial.println(event_component); 
-                Serial.println(int(event_component), HEX);
+                // Serial.println("---actuate"); 
+                // Serial.println(event_component); 
+                // Serial.println(int(event_component), HEX);
 
                 break;
             }
@@ -161,8 +161,8 @@ void Event::keyboard_release(String passingEvent){
                 event_component = passing_event[k];
                 Keyboard.release(event_component);
 
-                Serial.println("***deactuate"); 
-                Serial.println(event_component);
+                // Serial.println("***deactuate"); 
+                // Serial.println(event_component);
 
                 break;
         }

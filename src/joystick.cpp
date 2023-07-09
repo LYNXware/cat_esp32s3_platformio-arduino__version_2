@@ -17,13 +17,15 @@ void Joystick::initialize(){
 } 
 
   
+
+
 void Joystick::read_joystick(){
 
-    //read the analog joystick values
-    xVal = analogRead(pin_jx);       
-    yVal = analogRead(pin_jy);
+    // read the analog joystick values
+    joystickValues[0] = analogRead(pin_jx); 
+    joystickValues[1] = analogRead(pin_jy);
 
-
+    // check how many steps the joystick has
     if (layouts_manager.events_array[layer_control.active_layer][32][0] == '0'){
         one_step();
     }
@@ -33,30 +35,65 @@ void Joystick::read_joystick(){
 }
 
 
+
 void Joystick::one_step() {
 
-  // xVal = analogRead(pin_jx);       
-  // yVal = analogRead(pin_jy);
+  for (byte a = 0; a < 2; a++) {
 
-  int axisValues[4] = {xVal, xVal, yVal, yVal};
-
-  for (int i = 0; i < 4; i++) {
-
-    if ((i % 2 == 0 && axisValues[i] < thresholds[i]) 
-    || (i % 2 == 1 && axisValues[i] > thresholds[i])) {
-
-      if (!eventActivated[i]) {
-        eventActivated[i] = true;
-        event.actuate(events[i]);
-        Serial.println(eventNames[i]);
-      }
-    } 
+    if (joystickValues[a] < threshold_l1) {
+      // Serial.println(joystickValues[a]);
+      actuate_event(a,0);
+    }
     else{
-      if (eventActivated[i]) {        
-        eventActivated[i] = false;
-        event.deactuate(events[i]);
-        Serial.println("released");
-      }
+      deactuate_event(a,0);
+    }
+
+    if (joystickValues[a] > threshold_h1) {
+      // Serial.println(joystickValues[a]);
+      actuate_event(a,2);
+    }
+    else{
+      deactuate_event(a,2);
+    }
+  }
+}
+
+
+
+void Joystick::two_step() {
+
+  for (byte a = 0; a < 2; a++) {
+
+    if (threshold_l1 > joystickValues[a] && joystickValues[a] > threshold_l2) {
+      // Serial.println(joystickValues[a]);
+      actuate_event(a,0);
+    }
+    else{
+      deactuate_event(a,0);
+    }
+
+    if (joystickValues[a] < threshold_l2) {
+      // Serial.println(joystickValues[a]);
+      actuate_event(a,1);
+    }
+    else{
+      deactuate_event(a,1);
+    }
+
+    if (threshold_h1 < joystickValues[a] && joystickValues[a] < threshold_h2) {
+      // Serial.println(joystickValues[a]);
+      actuate_event(a,2);
+    }
+    else{
+      deactuate_event(a,2);
+    }
+
+    if (joystickValues[a] > threshold_h2) {
+      // Serial.println(joystickValues[a]);
+      actuate_event(a,3);
+    }
+    else{
+      deactuate_event(a,3);
     }
   }
 }
@@ -64,179 +101,38 @@ void Joystick::one_step() {
 
 
 
+void Joystick::actuate_event(byte axis, byte axis_event){
 
+  if (!joystick_state[axis][axis_event]) {
 
+    joystick_state[axis][axis_event] = true;
 
+    event.actuate(joystick_event_map[axis][axis_event]);
 
+    // Serial.print("press--");
+    // Serial.print(axis);
+    // Serial.print("-");
+    // Serial.println(axis_event);
 
-void Joystick::two_step() {
-//   int axisValues[] = {xVal, yVal};
-//   int lowThresholds[] = {l1, l2};
-//   int highThresholds[] = {h1, h2};
-//   int eventsLow[] = {xl1, xl2, yl1, yl2};
-//   int eventsHigh[] = {xh1, xh2, yh1, yh2};
-//   const char* eventNames[] = {"xl1", "xl2", "xh1", "xh2", "yl1", "yl2", "yh1", "yh2"};
-//   bool eventActivated[] = {false, false, false, false, false, false, false, false};
-
-//   for (int i = 0; i < 4; i++) {
-//     if (axisValues[i / 2] < lowThresholds[i]) {
-//       if (!eventActivated[i]) {
-//         event.actuate(eventsLow[i]);
-//         Serial.println(eventNames[i]);
-//         eventActivated[i] = true;
-//       }
-//     } else {
-//       event.deactuate(eventsLow[i]);
-//       eventActivated[i] = false;
-//     }
-
-//     if (axisValues[i / 2] > highThresholds[i]) {
-//       if (!eventActivated[i + 4]) {
-//         event.actuate(eventsHigh[i]);
-//         Serial.println(eventNames[i + 4]);
-//         eventActivated[i + 4] = true;
-//       }
-//     } else {
-//       event.deactuate(eventsHigh[i]);
-//       eventActivated[i + 4] = false;
-//     }
-//   }
+  }
 }
 
 
-// void Joystick::two_step() {
 
-//   int axisValues[] = {xVal, yVal};
-//   int lowThresholds[] = {l1, l2};
-//   int highThresholds[] = {h1, h2};
-//   int eventsLow[] = {xl1, xl2, yl1, yl2};
-//   int eventsHigh[] = {xh1, xh2, yh1, yh2};
-//   const char* eventNames[] = {"xl1", "xl2", "xh1", "xh2", "yl1", "yl2", "yh1", "yh2"};
-  
-//   for (int i = 0; i < 4; i++) {
-//     if (axisValues[i/2] < lowThresholds[i]) {
-//       event.actuate(eventsLow[i]);
-//       Serial.println(eventNames[i]);
-//     } else {
-//       event.deactuate(eventsLow[i]);
-//     }
-    
-//     if (axisValues[i/2] > highThresholds[i]) {
-//       event.actuate(eventsHigh[i]);
-//       Serial.println(eventNames[i + 4]);
-//     } else {
-//       event.deactuate(eventsHigh[i]);
-//     }
-//   }
-// }
+void Joystick::deactuate_event(byte axis, byte axis_event){
 
+  if (joystick_state[axis][axis_event]) {
 
-//  void Joystick::one_step(){
-  
-//       if (xVal < l1){  // x low value events
-//         event.actuate(xl1);
-//           Serial.println("xl1");
-//       }
-//       else{
-//         event.deactuate(xl1);
-//       }
-      
-//       if (xVal > h1){   // x heigh value events
-//         event.actuate(xh1);
-//           Serial.println("xh1");
-//       }
-//       else{
-//         event.deactuate(xh1);
-//       }
-    
-//       if (yVal < l1){   // y low value events
-//         event.actuate(yl1);
-//           Serial.println("yl1");
-//       }
-//       else{
-//         event.deactuate(yl1);
-//       }
-      
-//       if (yVal > h1){   // y heigh value events
-//         event.actuate(yh1);
-//           Serial.println("yh1");
-//       }
-//       else{
-//         event.deactuate(yh1);
-//       }
-//     }
+    joystick_state[axis][axis_event] = false;
 
+    event.deactuate(joystick_event_map[axis][axis_event]);
 
-
-  
-// void Joystick::two_step(){
-  
-//     if (xVal < l1 && xVal > l2){  // x low value events
-//     event.actuate(xl1);
-//         Serial.println("xl1");
-//     }
-//     else{
-//     event.deactuate(xl1);
-//     }
-    
-//     if (xVal < l2){
-//     event.actuate(xl2);  
-//         Serial.println("xl2");
-//     }
-//     else{
-//     event.deactuate(xl2);
-//     }
-    
-//     if (xVal > h1 && xVal < h2){   // x heigh value events
-//     event.actuate(xh1);
-//         Serial.println("xh1");
-//     }
-//     else{
-//     event.deactuate(xh1);
-//     }
-    
-//     if (xVal > h2){
-//     event.actuate(xh2);
-//         Serial.println("xh2");
-//     }
-//     else{
-//     event.deactuate(xh2);
-//     }
-
-
-//     if (yVal < l1 && yVal > l2){   // y low value events
-//     event.actuate(yl1);
-//         Serial.println("yl1");
-//     }
-//     else{
-//     event.deactuate(yl1);
-//     }
-    
-//     if (yVal < l2){
-//     event.actuate(yl2);   
-//         Serial.println("yl2");
-//     }
-//     else{
-//     event.deactuate(yl2);
-//     }  
-    
-//     if (yVal > h1 && yVal < h2){   // y heigh value events
-//     event.actuate(yh1);
-//         Serial.println("yh1");
-//     }
-//     else{
-//     event.deactuate(yh1);
-//     }
-    
-//     if (yVal > h2){
-//     event.actuate(yh2);
-//         Serial.println("yh2");
-//     }
-//     else{
-//     event.deactuate(yh2);
-//     }
-// }
-
+    // Serial.print("rr--");
+    // Serial.print(axis);
+    // Serial.print("-");
+    // Serial.println(axis_event);
+  }
+}
 
 
 

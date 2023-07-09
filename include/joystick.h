@@ -26,47 +26,41 @@ class Joystick {
         #define pin_jy 8
         #define pin_v 3
 
-        // variables for joystick values
-        int xVal;
-        int yVal;
-        
+        // declaring the joystick values        
+        int joystickValues[2];
+
         // declaring the joystick thresholds
-        const int h1 = 2300;   // frirst event height
-        const int l1 = 1600;   // frirst event low
-        const int h2 = 4045;    //second event height
-        const int l2 = 50;    //second event low
-
+        const int threshold_l1 = 1600;
+        const int threshold_l2 = 50;
+        const int threshold_h1 = 2300;
+        const int threshold_h2 = 4045;
+        
         // declaring the joystick events
-        const byte xl1 = 33;  //JF1
-        const byte xl2 = 34;  //JF2
-        const byte xh1 = 35;  //JB1
-        const byte xh2 = 36;  //JB2
-
-        const byte yh1 = 37;  //JL1
-        const byte yh2 = 38;  //JL2
-        const byte yl1 = 39;  //JR1
-        const byte yl2 = 40;  //JR2    
-
-        // byte yl1 = 37;  //JL1
-        // byte yl2 = 38;  //JL2
-        // byte yh1 = 39;  //JR1
-        // byte yh2 = 40;  //JR2  
-
+                                     //  JF1, JF2, JB1,  JB2,  JL1,  JL2, JR1, JR2
+        byte joystick_event_map[2][4] = {{33,  34,  35,  36},  {37,  38,  39,  40}};
+        bool joystick_state[2][4] = {{0, 0, 0, 0}, {0, 0, 0, 0}};
 
         void one_step();
-        // variables for one_step function
-        int thresholds[4] = {l1, h1, l1, h1};
-        byte events[4] = {xl1, xh1, yl1, yh1};
-        bool eventActivated[4] = {false, false, false, false};
-        const char* eventNames[4] = {"xl1", "xh1", "yl1", "yh1"};
-        
-        
-
-
         void two_step();
+
+        void actuate_event(byte axis, byte axis_event);
+        void deactuate_event(byte axis, byte axis_event);
+
 };
 
 // creating an instance of the Joystick class
 extern Joystick joystick;
 
 #endif
+
+
+
+        // const byte xl1 = 33;  //JF1
+        // const byte xl2 = 34;  //JF2
+        // const byte xh1 = 35;  //JB1
+        // const byte xh2 = 36;  //JB2
+
+        // const byte yh1 = 37;  //JL1
+        // const byte yh2 = 38;  //JL2
+        // const byte yl1 = 39;  //JR1
+        // const byte yl2 = 40;  //JR2    
