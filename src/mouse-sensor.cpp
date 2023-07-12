@@ -22,9 +22,8 @@ void ADNS5050::initialize() {
 }
 
 
-        
-        
-void ADNS5050::read_mouse_sendor() {
+
+void ADNS5050::read_mouse_sensor() {
 
     //digitalWrite(RESET, LOW);
     //delay(50);
