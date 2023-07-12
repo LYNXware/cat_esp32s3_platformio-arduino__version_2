@@ -104,7 +104,7 @@ void loop() {
   joystick.read_joystick();
 
   
-  // runs only if in config.h the additional_modules is set to 1
+  // included only if in config.h the additional_modules is set to 1
 #if additional_modules == 1  
   // checking if the mouse sensor is triggered
   adns5050.read_mouse_sensor();
