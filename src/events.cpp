@@ -88,14 +88,8 @@ void Event::keyboard_press(String passingEvent){
                 break;
 
             default:
-
                 event_component = passing_event[k];
                 Keyboard.press(event_component);
-
-                // Serial.println("---actuate"); 
-                // Serial.println(event_component); 
-                // Serial.println(int(event_component), HEX);
-
                 break;
             }
     }
@@ -153,13 +147,8 @@ void Event::keyboard_release(String passingEvent){
 
 
             default:
-
                 event_component = passing_event[k];
                 Keyboard.release(event_component);
-
-                // Serial.println("***deactuate"); 
-                // Serial.println(event_component);
-
                 break;
         }
     }
@@ -168,36 +157,27 @@ void Event::keyboard_release(String passingEvent){
 
 void Event::mouse_press(char m){
 
-    Serial.println("mouse press");
-    Serial.println(m);
-
-
     switch (m) {
                
         case 0xf1:
-            Serial.println("left_click");
             Mouse.press(MOUSE_LEFT);
-        break;
+            break;
         
         case 0xf2:
-            Serial.println("middle_click");
             Mouse.press(MOUSE_MIDDLE);
-        break;
+            break;
         
         case 0xf3:
-            Serial.println("right_click");
             Mouse.press(MOUSE_RIGHT);
-        break;   
+            break;   
         
         case 0xf4:
-            Serial.println("mouse_move 1");
             Mouse.move(0, 0, 1);
-        break;
+            break;
         
         case 0xf5:
-            Serial.println("mouse_move -1");
             Mouse.move(0, 0, -1);
-        break;    
+            break;    
         
         default:
             // do nothing

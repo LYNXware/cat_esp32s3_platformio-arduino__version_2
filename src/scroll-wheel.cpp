@@ -22,26 +22,20 @@ void Scroll_Wheel::read_encoder(){
         
     if (state != previous_state){              // we use the encoder_b pin to find out which way we turning.
         
-        if (digitalRead(encoder_b) != state) {   // Clockwise
+        if (digitalRead(encoder_b) != state) {   
+        // Clockwise
         value ++;
         scroll_value = 1;
-        //LeftRight = true;
         event.actuate(forward_scroll);
         event.deactuate(forward_scroll);
         } 
-        else {                                 //Counterclockwise
-        // LeftRight = false;
+        else {                                 
+        //Counterclockwise
         value--;
         scroll_value = -1;
         event.actuate(backward_scroll);
         event.deactuate(backward_scroll);           
         }
-
-        Serial.println(value);
-        Serial.println(scroll_value);
-        
-//         Mouse.move(0, 0, scroll_value);
-    
     } 
     previous_state = state;
 } 

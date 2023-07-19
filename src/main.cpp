@@ -37,13 +37,6 @@ Remark:
 
 
 
-//test button
-#define pI 46
-int bRead;
-
-
-
-
 
 void setup() {
   
@@ -74,20 +67,11 @@ void setup() {
   adns5050.initialize();
 #endif
 
-
   // Activation of required libraries
   Serial.begin(115200);
   Keyboard.begin();
   Mouse.begin();
-
-
-
-  //test buton
-  pinMode(pI, INPUT_PULLUP);
-
 }
-
-
 
 
 
@@ -116,19 +100,5 @@ void loop() {
   // checking if the mouse sensor is triggered
   adns5050.read_mouse_sensor();
 #endif
-
-
-
-
-  //test buton
-  bRead = digitalRead(pI);
-  if (bRead == 0) {
-    
-    // Serial.println(layercontro);
-    
-    Serial.println(config.variant);
-    // Serial.println(layouts_manager.incoming_raw_layouts);
-    // Serial.println(layouts_manager.events_array[0][0]);
-  }
 
 }//end loop
