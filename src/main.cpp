@@ -5,7 +5,6 @@ Developer: Stanislaw Kirpicnikow (Ape Devil)
 Remark: 
 */
 
-// !!!
 
 #include <Arduino.h>
 
