@@ -36,6 +36,7 @@ class Layer_Control {
         unsigned long press_start;
         unsigned long hold_time;
 
+        // the layer will be switch back if the key is pressed longer than min_hold_time
         const int min_hold_time = 500;
 
         //switch the leds on or off

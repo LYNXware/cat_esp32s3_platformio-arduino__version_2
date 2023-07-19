@@ -1,6 +1,6 @@
 /*
 Version: 0.2.0
-Date: 01.07.2023
+Date: 19.07.2023
 Developer: Stanislaw Kirpicnikow (Ape Devil)
 Remark: 
 */
@@ -22,7 +22,6 @@ Remark:
 // module to check the thumb events
 #include "thumb_module.h"
 
-
 // module to control the scroll wheel
 #include "scroll-wheel.h"
 
@@ -38,15 +37,9 @@ Remark:
 
 
 
-
-// dev 001
-
-
-
 //test button
 #define pI 46
 int bRead;
-
 
 
 
@@ -67,16 +60,23 @@ void setup() {
   // initialize the modules
   fingerModule.initialize();
   thumbModule.initialize();
+  
+  // included according to config.h
+#if finger_module == 1  
   scroll_wheel.initialize();
-  joystick.initialize();
+#endif
 
+#if thumb_module == 1  
+  joystick.initialize();
+#endif
   
 #if additional_modules == 1  
   adns5050.initialize();
 #endif
 
-  Serial.begin(115200);
 
+  // Activation of required libraries
+  Serial.begin(115200);
   Keyboard.begin();
   Mouse.begin();
 
@@ -93,18 +93,25 @@ void setup() {
 
 void loop() {
 
-
   // checking if the LYNXapp is connected and sends new layouts
-  layouts_manager.get_layouts(config.variant);
+  layouts_manager.get_layouts();
   
-  // checking if any events are triggered
+
+  // checking if key of thumb and fingers are triggered
   fingerModule.read_keystate();
   thumbModule.read_keystate();
-  scroll_wheel.read_encoder();
-  joystick.read_joystick();
-
   
-  // included only if in config.h the additional_modules is set to 1
+  // included according to config.h 
+#if finger_module == 1
+  // check if the scroll wheel is triggered
+  scroll_wheel.read_encoder();
+#endif  
+
+#if thumb_module == 1  
+  // check if the joystick is triggered
+  joystick.read_joystick();
+#endif
+  
 #if additional_modules == 1  
   // checking if the mouse sensor is triggered
   adns5050.read_mouse_sensor();

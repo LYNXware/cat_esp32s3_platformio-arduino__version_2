@@ -4,10 +4,6 @@
 #include "layer_control.h"
 
 
-
-
-
-
 void Event::actuate(byte event){
     
     passing_event = layouts_manager.events_array[layer_control.active_layer][event];
@@ -170,39 +166,6 @@ void Event::keyboard_release(String passingEvent){
 }
 
 
-// void Event::keyboard_press(String passingEvent){
-
-//     pel = passing_event.length();
-
-//     for(k=0; k < pel; k++){ 
-
-//         event_component = passing_event[k];
-//         Keyboard.press(event_component);
-
-//         Serial.println("---actuate"); 
-//         Serial.println(event_component); 
-//         Serial.println(int(event_component));
-//     }
-// }
-
-
-// void Event::keyboard_release(String passingEvent){
-
-//     pel = passing_event.length();
-
-//     for(k=0; k < pel; k++){ 
-//         event_component = passing_event[k];
-//         Keyboard.release(event_component);
-
-//         Serial.println("***deactuate"); 
-//         Serial.println(event_component);
-//     }
-    
-// }
-
-
-
-
 void Event::mouse_press(char m){
 
     Serial.println("mouse press");
@@ -273,5 +236,3 @@ USBHIDKeyboard Keyboard;
 USBHIDMouse Mouse;
 
 
-// from the USBHIDKeyboard library
-// KeyReport key_report;
