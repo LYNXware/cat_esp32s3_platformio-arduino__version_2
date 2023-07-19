@@ -5,17 +5,17 @@
 
 // // #include "USB.h"
 #include "USBHIDKeyboard.h"
-// USBHIDKeyboard Keyboard;
 #include "USBHIDMouse.h"
-// USBHIDMouse Mouse;
 
-
-
+// this class is for trinigering the keyboard and mouse events
 class Event {
 
     public:
+
         void actuate(byte event);
+        
         void deactuate(byte event);
+
 
     private:
 
@@ -34,15 +34,12 @@ class Event {
         void mouse_press(char m);
         void mouse_release(char m);    
 
-
 };
+
 
 extern USBHIDKeyboard Keyboard;
 extern USBHIDMouse Mouse;
 
-// extern KeyReport key_report;
-
 extern Event event;
-
 
 #endif
