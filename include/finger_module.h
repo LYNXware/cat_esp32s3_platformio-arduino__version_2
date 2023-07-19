@@ -16,6 +16,7 @@ class Finger_Module {
         // read the state of the finger module events
         void read_keystate();
 
+
     private:
 
         // declaring inputs and outputs for finger buttons moudule
@@ -40,7 +41,7 @@ class Finger_Module {
                                   { 4,  1,  8, 12, 15, 99},   // j3 
                                   {42,  0,  7, 11, 99, 99}};  // j4      // case 99 will never happen
 
-        // state of the finger module keys
+        // state (pressed/released) of the finger module keys
         bool f_state[4][6] = {{0, 0, 0, 0, 0, 0},
                               {0, 0, 0, 0, 0, 0},
                               {0, 0, 0, 0, 0, 0},

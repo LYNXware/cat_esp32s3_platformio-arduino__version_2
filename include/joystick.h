@@ -38,6 +38,7 @@ class Joystick {
         // declaring the joystick events
                                      //  JF1, JF2, JB1,  JB2,  JL1,  JL2, JR1, JR2
         byte joystick_event_map[2][4] = {{33,  34,  35,  36},  {37,  38,  39,  40}};
+        // state (triggered or not)
         bool joystick_state[2][4] = {{0, 0, 0, 0}, {0, 0, 0, 0}};
 
         void one_step();

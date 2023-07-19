@@ -1,24 +1,5 @@
 #include "layouts_manager.h"
 
-#include <Preferences.h>
-Preferences preferences;
-
-
-String found_you = "found_you";
-
-int inBL;
-int b;
-int f;
-
-byte layer;
-byte event_index;
-
-const char delimiter = 0xff;
-const char delimiter_layout = 0xfe;
-const char last_byte = 0xfd;
-
-int m;
-
 
 void Layouts_Manager::get_layouts(String variant) {
 
@@ -83,5 +64,5 @@ void Layouts_Manager::load_layouts(){
     split_raw_layouts();
 }
 
-
+Preferences preferences;
 Layouts_Manager layouts_manager;
