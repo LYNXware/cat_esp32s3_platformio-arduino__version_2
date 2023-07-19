@@ -21,14 +21,14 @@ class Layouts_Manager {
 
         // this functlon is checküng if the LYNXapp is sending the layouts via SerialComms
         // if yes, it will save the layouts in the preferences (espressif library)
-        void get_layouts();
+        void get_layouts(String variant);
 
         // this function is loading the layouts from the preferences (espressif library)
         void load_layouts();
         
     private:
 
-        String variant = config.variant;
+        // String variant = config.variant;
 
         String incoming_raw_layouts = "empty";
 

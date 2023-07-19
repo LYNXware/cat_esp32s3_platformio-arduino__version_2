@@ -96,7 +96,7 @@ void setup() {
 void loop() {
 
   // checking if the LYNXapp is connected and sends new layouts
-  layouts_manager.get_layouts();
+  layouts_manager.get_layouts(config.variant);
   
 
   // checking if key of thumb and fingers are triggered

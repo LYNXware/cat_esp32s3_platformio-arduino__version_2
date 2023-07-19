@@ -1,7 +1,7 @@
 #include "layouts_manager.h"
 
 
-void Layouts_Manager::get_layouts() {
+void Layouts_Manager::get_layouts(String variant) {
 
     if (Serial.available() > 0){
 
