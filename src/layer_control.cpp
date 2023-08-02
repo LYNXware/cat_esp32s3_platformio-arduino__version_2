@@ -7,17 +7,17 @@ void Layer_Control::initialize(){
 
     active_layer = 0;
 
-    pinMode(led_major_main,OUTPUT);       
-    digitalWrite(led_major_main, HIGH);  
+    // pinMode(led_major_main,OUTPUT);       
+    // digitalWrite(led_major_main, HIGH);  
     
-    pinMode(led_major_sub,OUTPUT);
-    digitalWrite(led_major_sub, LOW);
+    // pinMode(led_major_sub,OUTPUT);
+    // digitalWrite(led_major_sub, LOW);
     
-    pinMode(led_minor_main,OUTPUT);
-    digitalWrite(led_minor_main, LOW);
+    // pinMode(led_minor_main,OUTPUT);
+    // digitalWrite(led_minor_main, LOW);
     
-    pinMode(led_minor_sub,OUTPUT);
-    digitalWrite(led_minor_sub, LOW);
+    // pinMode(led_minor_sub,OUTPUT);
+    // digitalWrite(led_minor_sub, LOW);
 }
 
 
@@ -29,11 +29,11 @@ void Layer_Control::switch_layer(char c){
     
         if (active_layer == 0 || active_layer == 1){
             active_layer = 2;
-            switch_led(LOW,LOW,HIGH,LOW);
+            // switch_led(LOW,LOW,HIGH,LOW);
         }  
         else{
             active_layer = 0; 
-            switch_led(HIGH,LOW,LOW,LOW);
+            // switch_led(HIGH,LOW,LOW,LOW);
         }  
     }
     else if(c == main_sub){
@@ -41,22 +41,22 @@ void Layer_Control::switch_layer(char c){
         if (active_layer == 0){
 
             active_layer = 1;
-            switch_led(LOW,HIGH,LOW,LOW);
+            // switch_led(LOW,HIGH,LOW,LOW);
         }
         else if (active_layer == 1){
 
             active_layer = 0;
-            switch_led(HIGH,LOW,LOW,LOW);
+            // switch_led(HIGH,LOW,LOW,LOW);
         } 
         else if (active_layer == 2){
 
             active_layer = 3;
-            switch_led(LOW,LOW,LOW,HIGH);
+            // switch_led(LOW,LOW,LOW,HIGH);
         }   
         else{
 
             active_layer = 2;  
-            switch_led(LOW,LOW,HIGH,LOW); 
+            // switch_led(LOW,LOW,HIGH,LOW); 
         }     
     }
     else{
@@ -78,13 +78,13 @@ void Layer_Control::switch_layer_back(char c){
 }
 
 
-void Layer_Control::switch_led(bool blue, bool red1, bool green, bool red2){
+// void Layer_Control::switch_led(bool blue, bool red1, bool green, bool red2){
     
-        digitalWrite(led_major_main,blue);
-        digitalWrite(led_major_sub,red1);
-        digitalWrite(led_minor_main,green);
-        digitalWrite(led_minor_sub,red2);
-    }
+//         digitalWrite(led_major_main,blue);
+//         digitalWrite(led_major_sub,red1);
+//         digitalWrite(led_minor_main,green);
+//         digitalWrite(led_minor_sub,red2);
+//     }
 
 
 

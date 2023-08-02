@@ -21,11 +21,11 @@ class Layer_Control {
 
     private:
 
-        // daclaring the led pins
-        #define led_major_main 43     
-        #define led_major_sub 44
-        #define led_minor_main 1
-        #define led_minor_sub 2
+        // // daclaring the led pins
+        // #define led_major_main 43     
+        // #define led_major_sub 44
+        // #define led_minor_main 1
+        // #define led_minor_sub 2
 
         // declaring the layer change codes
         const char major_minor = 0xfb;
