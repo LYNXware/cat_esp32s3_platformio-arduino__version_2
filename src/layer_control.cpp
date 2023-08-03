@@ -6,6 +6,7 @@
 void Layer_Control::initialize(){
 
     active_layer = 0;
+    neopixelled.layer_witch(active_layer);
 
     // pinMode(led_major_main,OUTPUT);       
     // digitalWrite(led_major_main, HIGH);  
@@ -30,10 +31,12 @@ void Layer_Control::switch_layer(char c){
         if (active_layer == 0 || active_layer == 1){
             active_layer = 2;
             // switch_led(LOW,LOW,HIGH,LOW);
+            neopixelled.layer_witch(active_layer);
         }  
         else{
             active_layer = 0; 
             // switch_led(HIGH,LOW,LOW,LOW);
+            neopixelled.layer_witch(active_layer);
         }  
     }
     else if(c == main_sub){
@@ -42,21 +45,25 @@ void Layer_Control::switch_layer(char c){
 
             active_layer = 1;
             // switch_led(LOW,HIGH,LOW,LOW);
+            neopixelled.layer_witch(active_layer);
         }
         else if (active_layer == 1){
 
             active_layer = 0;
             // switch_led(HIGH,LOW,LOW,LOW);
+            neopixelled.layer_witch(active_layer);
         } 
         else if (active_layer == 2){
 
             active_layer = 3;
             // switch_led(LOW,LOW,LOW,HIGH);
+            neopixelled.layer_witch(active_layer);
         }   
         else{
 
             active_layer = 2;  
             // switch_led(LOW,LOW,HIGH,LOW); 
+            neopixelled.layer_witch(active_layer);
         }     
     }
     else{

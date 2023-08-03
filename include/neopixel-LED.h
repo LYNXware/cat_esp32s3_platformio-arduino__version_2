@@ -6,27 +6,26 @@
 
 #include <Adafruit_NeoPixel.h>
 
-    #define LED_PIN    44
-    #define LED_COUNT 1
+#define LED_PIN    44
+#define LED_COUNT 1
+#define LED_power 43
 
-Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+extern Adafruit_NeoPixel strip_layer_switch;
+
 
 
 class NeopixelLED {
 
     public:
 
+        // initialization of led strip
         void initialize();
 
         void led_test();
 
-    private:
-    
-    #define power 43
-
-
-
-    
+        // function to change led colors to show selected layer
+        void layer_witch(byte active_layer);
 
 };
 

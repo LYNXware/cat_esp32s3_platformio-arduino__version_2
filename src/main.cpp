@@ -84,7 +84,7 @@ void setup() {
 void loop() {
 
 
-  neopixelled.led_test();
+  // neopixelled.led_test();
 
   // checking if the LYNXapp is connected and sends new layouts
   layouts_manager.get_layouts(config.variant);
