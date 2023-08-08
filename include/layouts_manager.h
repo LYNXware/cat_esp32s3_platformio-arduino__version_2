@@ -32,7 +32,7 @@ class Layouts_Manager {
 
         String incoming_raw_layouts = "empty";
 
-        String found_you = "found_you";
+        String comms_message = "are_you_a_cat";
 
         int inBL;
         int b;
