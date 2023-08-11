@@ -7,7 +7,7 @@ void Layouts_Manager::get_layouts(String variant) {
 
         incoming_raw_layouts = Serial.readString();
 
-        if (found_you == incoming_raw_layouts){
+        if (comms_message == incoming_raw_layouts){
             Serial.println(variant);
         }
         else{
