@@ -2,13 +2,18 @@
 #define LAYER_CONTROL_H
 
 #include <Arduino.h>
-
+#include "neopixel-LED.h"
 
 class Layer_Control {
 
     public:
 
-        byte active_layer;
+        
+        byte active_layer; 
+        // major-main 0
+        // major-sub 1
+        // minor-main 2
+        // minor-sub 3
 
         // initialize  the pins for leds and set the layer to major-main
         void initialize();
@@ -21,11 +26,11 @@ class Layer_Control {
 
     private:
 
-        // daclaring the led pins
-        #define led_major_main 43     
-        #define led_major_sub 44
-        #define led_minor_main 1
-        #define led_minor_sub 2
+        // // daclaring the led pins
+        // #define led_major_main 43     
+        // #define led_major_sub 44
+        // #define led_minor_main 1
+        // #define led_minor_sub 2
 
         // declaring the layer change codes
         const char major_minor = 0xfb;
@@ -40,7 +45,7 @@ class Layer_Control {
         const int min_hold_time = 500;
 
         //switch the leds on or off
-        void switch_led(bool blue, bool red1, bool green, bool red2);
+        // void switch_led(bool blue, bool red1, bool green, bool red2);
 
 
         // to do: transmit the layer change to othe devices via BLE

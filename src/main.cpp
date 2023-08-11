@@ -6,14 +6,17 @@ Remark:
 */
 //main secure 001
 
+// dev secure 001
 
-
+// led 001
 
 #include <Arduino.h>
 
-
 // module to define the cat variant
 #include "config.h"
+
+// module to control the Neopixel LEDs
+#include "neopixel-LED.h"
 
 // module to control the layers
 #include "layer_control.h"
@@ -40,27 +43,12 @@ Remark:
 #include "events.h"
 
 
-
-
-
-// dev 001
-
-// premain  001
-
-
-//test button
-#define pI 46
-int bRead;
-
-
-
-
-
-
 void setup() {
   
   // setting up the cat variant for the communication with the LYNXapp
   config.set_variant();
+
+  neopixelled.initialize();
 
   // set the layer to major-main and initialize the LEDs
   layer_control.initialize();
@@ -95,6 +83,9 @@ void setup() {
 
 
 void loop() {
+
+
+  // neopixelled.led_test();
 
   // checking if the LYNXapp is connected and sends new layouts
   layouts_manager.get_layouts(config.variant);
