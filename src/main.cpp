@@ -4,12 +4,13 @@ Date: 19.07.2023
 Developer: Stanislaw Kirpicnikow (Ape Devil)
 Remark: 
 */
-// main 001
+//main secure 001
 
 
 
 
 #include <Arduino.h>
+
 
 // module to define the cat variant
 #include "config.h"
@@ -40,7 +41,21 @@ Remark:
 
 
 
-// main 001
+
+
+// dev 001
+
+// premain  001
+
+
+//test button
+#define pI 46
+int bRead;
+
+
+
+
+
 
 void setup() {
   
