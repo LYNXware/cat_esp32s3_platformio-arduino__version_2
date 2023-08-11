@@ -4,6 +4,9 @@ Date: 19.07.2023
 Developer: Stanislaw Kirpicnikow (Ape Devil)
 Remark: 
 */
+// main 001
+
+
 
 
 #include <Arduino.h>
