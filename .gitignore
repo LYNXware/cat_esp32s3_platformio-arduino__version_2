@@ -5,5 +5,7 @@
 .vscode/ipch
 .vscode
 
+.gitignore
+
 test.cpp
 test.h
