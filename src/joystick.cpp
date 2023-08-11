@@ -22,8 +22,8 @@ void Joystick::initialize(){
 void Joystick::read_joystick(){
 
     // read the analog joystick values
-    joystickValues[0] = analogRead(pin_jx); 
-    joystickValues[1] = analogRead(pin_jy);
+    joystickValues[0] = analogRead(pin_jy); 
+    joystickValues[1] = analogRead(pin_jx);
 
     // check how many steps the joystick has
     if (layouts_manager.events_array[layer_control.active_layer][32][0] == '0'){

@@ -2,8 +2,9 @@
 #define THUMB_MODULE_H
 
 #include <Arduino.h>
-
 #include "events.h"
+#include "config.h"
+
 
 
 
@@ -30,11 +31,23 @@ class Thumb_Module {
         byte ti;
         byte t_index;
 
+        
+        #if thumb_module == 0            
         // events map of the thumb module keys
-        const byte t_map[4][3] = {{29,  30,   25},
-                                  {28,  31,   26},
-                                  {24,  27,   20},
-                                  {23,  22,   21}};    
+            const byte t_map[4][3] = {{29,  30,   25},
+                                      {28,  31,   26},
+                                      {24,  27,   20},
+                                      {23,  22,   21}};
+
+        #elif thumb_module == 1  
+        // events map of the thumb module keys
+            const byte t_map[4][3] = {{29,  30,   25},
+                                      {24,  31,   20},
+                                      {28,  27,   26},
+                                      {23,  22,   21}};
+        #endif
+
+
 
         // state of the thumb module keys
         bool t_state[4][3] = {{0, 0, 0},
