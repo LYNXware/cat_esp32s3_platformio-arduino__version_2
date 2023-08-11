@@ -5,9 +5,9 @@ Developer: Stanislaw Kirpicnikow (Ape Devil)
 Remark: 
 */
 
-// dev secure 002
+// dev
 
-// led 001
+
 
 #include <Arduino.h>
 
