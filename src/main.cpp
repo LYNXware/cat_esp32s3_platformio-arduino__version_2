@@ -19,6 +19,9 @@ Remark:
 // module to control the Neopixel LEDs
 #include "neopixel-LED.h"
 
+// module to control the ESP-NOW communication
+#include "esp-now.h"
+
 // module to control the layers
 #include "layer_control.h"
 
@@ -47,12 +50,23 @@ Remark:
 // dev
 
 
+//test button
+#define pI 46
+int bRead;
+
+
 void setup() {
+
+
+  //test buton
+  pinMode(pI, INPUT_PULLUP);
   
   // setting up the cat variant for the communication with the LYNXapp
   config.set_variant();
 
   neopixelled.initialize();
+
+  espnow.initialize();
 
   // set the layer to major-main and initialize the LEDs
   layer_control.initialize();
@@ -87,6 +101,17 @@ void setup() {
 
 
 void loop() {
+
+
+  bRead = digitalRead(pI);
+  if (bRead == 0) {
+
+    espnow.test();
+    espnow.send_switch_layer(5);
+  }
+  // Serial.println("testValue");
+  // Serial.println(espnow.testValue);
+
 
 
   // neopixelled.led_test();
