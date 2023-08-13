@@ -24,8 +24,12 @@ class EspNow {
 
         static uint8_t testValue;
 
+        void scan_for_slave();
+
 
     private:
+
+        // void scan_for_slave();
 
         uint8_t mac[6];
 

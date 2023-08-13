@@ -5,22 +5,30 @@ EspNow espnow;
 
 void EspNow::initialize() {
 
-
-    // uint8_t mac[6];
-    // get the mac address of the device
-    esp_read_mac(mac, ESP_MAC_WIFI_STA);
-
-
-    // Initialize ESP-NOW
     WiFi.mode(WIFI_STA);
     esp_now_init();
 
+    // slave
+    // esp_now_set_self_role(ESP_NOW_ROLE_SLAVE);
+
+    // esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
+  
+
+    // uint8_t mac[6];
+    // get the mac address of the device
+    // esp_read_mac(mac, ESP_MAC_WIFI_STA);
+
+
+    // Initialize ESP-NOW
+    // WiFi.mode(WIFI_STA);
+    // esp_now_init();
+
     // Add peer
     // esp_now_peer_info_t peerInfo;
-    memcpy(peerInfo.peer_addr, mac, 6);
-    peerInfo.channel = 0;
-    peerInfo.encrypt = false;
-    esp_now_add_peer(&peerInfo);
+    // memcpy(peerInfo.peer_addr, mac, 6);
+    // peerInfo.channel = 0;
+    // peerInfo.encrypt = false;
+    // esp_now_add_peer(&peerInfo);
 
     // Register callback functions
     esp_now_register_send_cb(OnDataSent);
@@ -28,8 +36,72 @@ void EspNow::initialize() {
    
 }
 
+void EspNow::scan_for_slave(){
+
+    Serial.println("Scanning for slaves");
+  
+    // Scan for slaves
+    int8_t scanResults = WiFi.scanNetworks();
+    // reset mac address
+    memset(&peerInfo, 0, sizeof(peerInfo));
+    // Serial.println("Scan done");
+
+      if (scanResults == 0) {
+          Serial.println("No ESP32 devices nearby found");
+
+      } else {
+
+          Serial.print("Found ");
+          Serial.print(scanResults);
+          Serial.println(" device(s)");
+
+          for (int i = 0; i < scanResults; ++i) {
+
+              // Print SSID and RSSI for each device found
+              String SSID = WiFi.SSID(i);
+              int32_t RSSI = WiFi.RSSI(i);
+              String BSSIDstr = WiFi.BSSIDstr(i);
+
+              Serial.printf("%d: %s (%d) %s\n", i + 1, SSID.c_str(), RSSI, BSSIDstr.c_str());
+              delay(10);
+              // Serial.println(SSID);
+              // Serial.println(SSID.indexOf("RX"));
+
+              // Check if the current device starts with `Slave`
+              if (SSID.indexOf("Slave") == 0) {
+                  // SSID of interest
+                  Serial.println("Found a Slave.");
+                  // Get BSSID => Mac Address of the Slave
+                  int mac[6];
+                  if ( 6 == sscanf(BSSIDstr.c_str(), "%x:%x:%x:%x:%x:%x%c", 
+                      &mac[0], &mac[1], &mac[2], &mac[3], &mac[4], &mac[5])) {
+                      for (int ii = 0; ii < 6; ++ii) {
+                          peerInfo.peer_addr[ii] = (uint8_t) mac[ii];
+                      }
+                  }
+  
+                  peerInfo.channel = 0; // pick a channel
+                  peerInfo.encrypt = false; // no encryption
+  
+                  // Add peer        
+                  esp_now_add_peer(&peerInfo);
+                  // break;
+              }
+          }
+      }
+      // clean up ram
+      WiFi.scanDelete();
+}
+
+
+
+
+
+
+
 // Callback function for sending data
 void EspNow::OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status) {
+  Serial.println("OnDataSent");
   // Handle send status
 }
 
@@ -61,6 +133,8 @@ void EspNow::test(){
 
   Serial.println("ESP-NOW test");
 
+  esp_read_mac(mac, ESP_MAC_WIFI_STA);
+
   Serial.print("MAC Address: ");
   for (int i = 0; i < 6; i++) {
     Serial.printf("%02X", mac[i]);
@@ -74,6 +148,7 @@ void EspNow::test(){
   Serial.println(testValue);
 
 }
+
 
 void EspNow::send_switch_layer(uint8_t dynamicValue) {
     uint8_t data[4];

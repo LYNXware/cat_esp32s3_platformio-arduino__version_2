@@ -106,8 +106,9 @@ void loop() {
   bRead = digitalRead(pI);
   if (bRead == 0) {
 
-    espnow.test();
-    espnow.send_switch_layer(5);
+    // espnow.test();
+    espnow.scan_for_slave();
+    // espnow.send_switch_layer(5);
   }
   // Serial.println("testValue");
   // Serial.println(espnow.testValue);
