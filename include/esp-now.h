@@ -29,6 +29,10 @@ class EspNow {
 
     private:
 
+        // copilet are you tehre
+        const char *SSID = "cat_slave";
+        #define CHANNEL 1
+
         // void scan_for_slave();
 
         uint8_t mac[6];
