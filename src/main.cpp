@@ -107,8 +107,8 @@ void loop() {
   if (bRead == 0) {
 
     // espnow.test();
-    espnow.scan_for_slave();
-    espnow.send_switch_layer(3);
+    // espnow.scan_for_slave();
+    espnow.send_switch_layer(66);
   }
   // Serial.println("testValue");
   // Serial.println(espnow.testValue);

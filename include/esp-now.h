@@ -15,39 +15,22 @@ class EspNow {
 
         void initialize();
 
-
-        void test();
-
-        void send_switch_layer(uint8_t dynamicValue);
-
-        static uint8_t testValue;
+        void send_switch_layer(uint8_t la);
 
         void scan_for_slave();
 
-
     private:
 
-        // wifi network name
-        const char *SSID = "cat_slave";
+        // wife credentials
         #define CHANNEL 1
+        String wifi_name = "LYNX-"; // + cat_variant;
 
-        // void scan_for_slave();
-
-        uint8_t mac[6];
-
-        // master_mac[6]
-        // slave_mac[6]
-
-
-
+        // slave mac address
         esp_now_peer_info_t peerInfo;
     
         static void OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status);
 
         static void OnDataReceived(const uint8_t* mac_addr, const uint8_t* data, int data_len); 
-
-
-
 
 };
 
