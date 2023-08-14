@@ -5,7 +5,7 @@ Developer: Stanislaw Kirpicnikow (Ape Devil)
 Remark: 
 */
 
-// dev
+// dev 2LED
 
 
 
@@ -107,7 +107,7 @@ void loop() {
   if (bRead == 0) {
 
     // espnow.test();
-    // espnow.scan_for_slave();
+    espnow.scan_for_slave();
     espnow.send_switch_layer(66);
   }
   // Serial.println("testValue");
