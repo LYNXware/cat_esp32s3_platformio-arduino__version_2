@@ -5,8 +5,15 @@ EspNow espnow;
 
 void EspNow::initialize() {
 
-    WiFi.mode(WIFI_STA);
+    
+    // WiFi.mode(WIFI_STA); // Set ESP32 to station (client) mode
+    // WiFi.mode(WIFI_AP); // Set ESP32 to access point mode
+    WiFi.mode(WIFI_AP_STA);
     esp_now_init();
+
+    // const char *SSID = "Slave_1";
+    WiFi.softAP(SSID, "Slave_1_Password", CHANNEL, 0);
+
 
     // slave
     // esp_now_set_self_role(ESP_NOW_ROLE_SLAVE);
@@ -68,7 +75,7 @@ void EspNow::scan_for_slave(){
               // Serial.println(SSID.indexOf("RX"));
 
               // Check if the current device starts with `Slave`
-              if (SSID.indexOf("Slave") == 0) {
+              if (SSID.indexOf("cat_slave") == 0) {
                   // SSID of interest
                   Serial.println("Found a Slave.");
                   // Get BSSID => Mac Address of the Slave
@@ -112,6 +119,9 @@ void EspNow::OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status) {
 
 
 void EspNow::OnDataReceived(const uint8_t* mac_addr, const uint8_t* data, int data_len) {
+
+    Serial.println("OnDataSent");
+
     if (data_len == 4) {
         if (data[0] == 'c' && data[1] == 'a' && data[2] == 't') {
             uint8_t dynamicValue = data[3];
@@ -150,6 +160,8 @@ void EspNow::test(){
 }
 
 
+
+
 void EspNow::send_switch_layer(uint8_t dynamicValue) {
     uint8_t data[4];
     data[0] = 'c';
@@ -157,7 +169,10 @@ void EspNow::send_switch_layer(uint8_t dynamicValue) {
     data[2] = 't';
     data[3] = dynamicValue;
 
-    Serial.println("Sending data...");
+    Serial.println("send_switch_layer data...");
+
+    Serial.println(peerInfo.peer_addr[0]);
+
 
     // Send the data using ESP-NOW
     esp_now_send(peerInfo.peer_addr, data, sizeof(data));
