@@ -108,7 +108,7 @@ void loop() {
 
     // espnow.test();
     espnow.scan_for_slave();
-    espnow.send_switch_layer(5);
+    espnow.send_switch_layer(3);
   }
   // Serial.println("testValue");
   // Serial.println(espnow.testValue);
