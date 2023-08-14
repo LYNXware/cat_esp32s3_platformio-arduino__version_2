@@ -1,5 +1,6 @@
 #ifndef ESP_NOW_H
 #define ESP_NOW_H
+#include "config.h"
 
 #include <Arduino.h>
 
@@ -14,9 +15,6 @@ class EspNow {
 
         void initialize();
 
-        // void send_data(uint8_t data[]);
-
-        // void receive_data(uint8_t data[]);
 
         void test();
 
@@ -29,7 +27,7 @@ class EspNow {
 
     private:
 
-        // copilet are you tehre
+        // wifi network name
         const char *SSID = "cat_slave";
         #define CHANNEL 1
 

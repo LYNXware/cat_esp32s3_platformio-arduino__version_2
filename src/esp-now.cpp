@@ -5,50 +5,37 @@ EspNow espnow;
 
 void EspNow::initialize() {
 
-    
     // WiFi.mode(WIFI_STA); // Set ESP32 to station (client) mode
     // WiFi.mode(WIFI_AP); // Set ESP32 to access point mode
+
+    // Initialize Wi-Fi: simultanious (Station Mode) and WIFI_AP (Access Point Mode)
     WiFi.mode(WIFI_AP_STA);
-    esp_now_init();
 
-    // const char *SSID = "Slave_1";
-    WiFi.softAP(SSID, "Slave_1_Password", CHANNEL, 0);
-
-
-    // slave
-    // esp_now_set_self_role(ESP_NOW_ROLE_SLAVE);
-
-    // esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
-  
-
-    // uint8_t mac[6];
-    // get the mac address of the device
-    // esp_read_mac(mac, ESP_MAC_WIFI_STA);
-
+    // set up an Access Point 
+    // WiFi.softAP(SSID, "Slave_1_Password", CHANNEL, 0);
+    WiFi.softAP(config.variant, "Slave_1_Password", CHANNEL, 0);
 
     // Initialize ESP-NOW
-    // WiFi.mode(WIFI_STA);
-    // esp_now_init();
-
-    // Add peer
-    // esp_now_peer_info_t peerInfo;
-    // memcpy(peerInfo.peer_addr, mac, 6);
-    // peerInfo.channel = 0;
-    // peerInfo.encrypt = false;
-    // esp_now_add_peer(&peerInfo);
+    esp_now_init();
 
     // Register callback functions
     esp_now_register_send_cb(OnDataSent);
     esp_now_register_recv_cb(OnDataReceived);
-   
 }
+
+
+
+
+
 
 void EspNow::scan_for_slave(){
 
     Serial.println("Scanning for slaves");
   
     // Scan for slaves
-    int8_t scanResults = WiFi.scanNetworks();
+    // int8_t scanResults = WiFi.scanNetworks();
+    int8_t scanResults = WiFi.scanNetworks(false, false, false, 300, CHANNEL); // Scan only on one channel
+    
     // reset mac address
     memset(&peerInfo, 0, sizeof(peerInfo));
     // Serial.println("Scan done");
@@ -75,7 +62,7 @@ void EspNow::scan_for_slave(){
               // Serial.println(SSID.indexOf("RX"));
 
               // Check if the current device starts with `Slave`
-              if (SSID.indexOf("cat_slave") == 0) {
+              if (SSID.indexOf("C") == 0) {
                   // SSID of interest
                   Serial.println("Found a Slave.");
                   // Get BSSID => Mac Address of the Slave
@@ -120,13 +107,13 @@ void EspNow::OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status) {
 
 void EspNow::OnDataReceived(const uint8_t* mac_addr, const uint8_t* data, int data_len) {
 
-    Serial.println("OnDataSent");
+    Serial.println("OnDataReceived");
 
     if (data_len == 4) {
         if (data[0] == 'c' && data[1] == 'a' && data[2] == 't') {
             uint8_t dynamicValue = data[3];
 
-            Serial.print("Received data from: ");
+            Serial.print("Received data: ");
             Serial.println(dynamicValue);
 
             // Now you can use the dynamicValue received
