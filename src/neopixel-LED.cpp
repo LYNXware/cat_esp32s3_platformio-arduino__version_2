@@ -10,11 +10,13 @@ NeopixelLED neopixelled;
 
 void NeopixelLED::initialize(){
 
+    // power suply for the led strip
     pinMode(LED_power,OUTPUT);    
     digitalWrite(LED_power,HIGH);
 
+    // initializing the led strip
     strip_layer_switch.begin();
-    strip_layer_switch.show(); // Initialize the pixel to 'off'
+    strip_layer_switch.show(); 
 
 }
 
@@ -51,20 +53,6 @@ void NeopixelLED::layer_witch(byte active_layer){
 }
 
 
-
-
-
-void NeopixelLED::led_test(){
-
-                    //led /R /G /B
-    strip_layer_switch.setPixelColor(0, 0, 80, 0); // Set the color of the pixel to red
-    strip_layer_switch.show();
-    delay(500);
-
-    strip_layer_switch.setPixelColor(0, 0, 0, 0); // Turn off the pixel
-    strip_layer_switch.show();
-    delay(500);
-}
 
 
 
