@@ -1,23 +1,25 @@
-#ifndef ESP_NOW_H
-#define ESP_NOW_H
-#include "config.h"
+#ifndef CAT_NOW_H
+#define CAT_NOW_H
 
 #include <Arduino.h>
-
-
 #include <WiFi.h>
 #include <esp_now.h>
 
+#include "config.h"
+#include "layer_control.h"
 
-class EspNow {
+
+
+class CatNow {
 
     public:
 
+        // turn on wifi and CatNow
         void initialize();
 
-        void send_switch_layer(uint8_t la);
-
         void scan_for_slave();
+
+        void send_switch_layer(uint8_t layer);
 
     private:
 
@@ -27,14 +29,18 @@ class EspNow {
 
         // slave mac address
         esp_now_peer_info_t peerInfo;
-    
-        static void OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status);
+        // peer is available
+        bool peer_available = false;
 
+        static bool data_received;
+
+
+        static void OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status);
         static void OnDataReceived(const uint8_t* mac_addr, const uint8_t* data, int data_len); 
 
 };
 
 //instance of the class 
-extern EspNow espnow;
+extern CatNow catnow;
 
 #endif

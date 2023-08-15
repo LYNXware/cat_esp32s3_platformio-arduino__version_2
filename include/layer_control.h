@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include "neopixel-LED.h"
+#include "cat-now.h"
 
 
 class Layer_Control {
@@ -21,6 +22,9 @@ class Layer_Control {
         // switch back to the previous layer 
         // if the key is pressed longer than min_hold_time
         void switch_layer_back(char c);
+
+
+        void received_layer_switch(u8_t layer);
 
 
     private:

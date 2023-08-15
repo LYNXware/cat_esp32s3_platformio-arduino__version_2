@@ -11,8 +11,6 @@ Remark:
 
 #include <Arduino.h>
 
-//dev
-
 // module to define the cat variant
 #include "config.h"
 
@@ -20,7 +18,7 @@ Remark:
 #include "neopixel-LED.h"
 
 // module to control the ESP-NOW communication
-#include "esp-now.h"
+#include "cat-now.h"
 
 // module to control the layers
 #include "layer_control.h"
@@ -66,7 +64,7 @@ void setup() {
 
   neopixelled.initialize();
 
-  espnow.initialize();
+  catnow.initialize();
 
   // set the layer to major-main and initialize the LEDs
   layer_control.initialize();
@@ -106,16 +104,11 @@ void loop() {
   bRead = digitalRead(pI);
   if (bRead == 0) {
 
-    // espnow.test();
-    espnow.scan_for_slave();
-    espnow.send_switch_layer(66);
+    // catnow.test();
+    catnow.scan_for_slave();
+    catnow.send_switch_layer(66);
   }
-  // Serial.println("testValue");
-  // Serial.println(espnow.testValue);
 
-
-
-  // neopixelled.led_test();
 
   // checking if the LYNXapp is connected and sends new layouts
   layouts_manager.get_layouts(config.variant);

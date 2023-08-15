@@ -12,9 +12,6 @@
 // creating an instance of the Adafruit_NeoPixel class
 extern Adafruit_NeoPixel strip_layer_switch;
 
-// creating an instance of the NeopixelLED class
-extern NeopixelLED neopixelled;
-
 
 class NeopixelLED {
 
@@ -26,5 +23,8 @@ class NeopixelLED {
         // function to change led colors to show selected layer
         void layer_witch(byte active_layer);
 };
+
+// creating an instance of the NeopixelLED class
+extern NeopixelLED neopixelled;
 
 #endif

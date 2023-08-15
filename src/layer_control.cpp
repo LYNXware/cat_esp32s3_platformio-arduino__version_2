@@ -18,35 +18,31 @@ void Layer_Control::switch_layer(char c){
     
         if (active_layer == 0 || active_layer == 1){
             active_layer = 2;
-            neopixelled.layer_witch(active_layer);
         }  
         else{
             active_layer = 0; 
-            neopixelled.layer_witch(active_layer);
         }  
     }
     else if(c == main_sub){
     
         if (active_layer == 0){
             active_layer = 1;
-            neopixelled.layer_witch(active_layer);
         }
         else if (active_layer == 1){
             active_layer = 0;
-            neopixelled.layer_witch(active_layer);
         } 
         else if (active_layer == 2){
             active_layer = 3;
-            neopixelled.layer_witch(active_layer);
         }   
         else{
             active_layer = 2;  
-            neopixelled.layer_witch(active_layer);
         }     
     }
     else{
     // do nothing
     }
+    catnow.send_switch_layer(active_layer);
+    neopixelled.layer_witch(active_layer);
     // delay(10);
 }
 
@@ -63,3 +59,8 @@ void Layer_Control::switch_layer_back(char c){
 }
 
 
+// function to switch layer from the outside (second device)
+void Layer_Control::received_layer_switch(u8_t layer){
+    active_layer = layer;
+    neopixelled.layer_witch(active_layer);
+}
