@@ -32,9 +32,7 @@ class CatNow {
         // peer is available
         bool peer_available = false;
 
-        static bool data_received;
-
-
+        // esp-now callbacks
         static void OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status);
         static void OnDataReceived(const uint8_t* mac_addr, const uint8_t* data, int data_len); 
 

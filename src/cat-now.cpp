@@ -78,9 +78,6 @@ void CatNow::scan_for_slave(){
 }
 
 
-// to make sure that layer-switch is not triggered twice
-bool CatNow::data_received = false;
-
 
 // Callback function for sending data
 void CatNow::OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status) {
@@ -93,7 +90,6 @@ void CatNow::OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status) {
 void CatNow::OnDataReceived(const uint8_t* mac_addr, const uint8_t* data, int data_len) {
 
     Serial.println("OnDataReceived");
-    data_received = true;
 
     if (data_len == 4) {
         if (data[0] == 'c' && data[1] == 'a' && data[2] == 't') {
@@ -113,12 +109,6 @@ void CatNow::OnDataReceived(const uint8_t* mac_addr, const uint8_t* data, int da
 void CatNow::send_switch_layer(uint8_t layer) {
 
     Serial.println("send_switch_layer");
-
-    if (data_received == true) {
-        Serial.println("stop: send_switch_layer");
-        data_received = false;
-        return;
-    }
 
     // Check if the peer exists
     if (peer_available == false) {
