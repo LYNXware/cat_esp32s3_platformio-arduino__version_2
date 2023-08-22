@@ -16,9 +16,26 @@ class Scroll_Wheel {
     private:
 
         // encoder pins
-        #define encoder_a 35    //a2
-        #define encoder_b 36    //a1
-        #define encoder_GND 0   //a3
+        #define encoder_a 45    //a2
+        #define encoder_b 48    //a1
+        #define encoder_GND 0   //a1
+        
+
+
+
+        // #if side == 0            
+        //     #define encoder_a 48    //a1
+        //     #define encoder_b 45    //a2
+
+        // #elif side == 1  
+        //     #define encoder_a 45    //a2
+        //     #define encoder_b 48    //a1
+        // #endif
+
+
+
+
+
         
         // scroll wheel events in the layouts  
         #define forward_scroll 41
