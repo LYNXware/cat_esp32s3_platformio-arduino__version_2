@@ -15,22 +15,20 @@ class Scroll_Wheel {
 
     private:
 
-        // encoder pins
-        #define encoder_a 45    //a2
-        #define encoder_b 48    //a1
+        // // encoder pins
+        // #define encoder_a 45    //a2
+        // #define encoder_b 48    //a1
         #define encoder_GND 0   //a1
         
 
+        #if side == 0            
+            #define encoder_a 48    //a1
+            #define encoder_b 45    //a2
 
-
-        // #if side == 0            
-        //     #define encoder_a 48    //a1
-        //     #define encoder_b 45    //a2
-
-        // #elif side == 1  
-        //     #define encoder_a 45    //a2
-        //     #define encoder_b 48    //a1
-        // #endif
+        #elif side == 1  
+            #define encoder_a 45    //a2
+            #define encoder_b 48    //a1
+        #endif
 
 
 
