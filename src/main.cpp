@@ -1,11 +1,11 @@
 /*
 Version: 0.2.0
-Date: 19.07.2023
+Date: 01.09.2023
 Developer: Stanislaw Kirpicnikow (Ape Devil)
 Remark: 
 */
 
-// dev secure 02.09.23
+// main
 
 
 
