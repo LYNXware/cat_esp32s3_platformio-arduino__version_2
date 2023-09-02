@@ -4,16 +4,10 @@ Date: 19.07.2023
 Developer: Stanislaw Kirpicnikow (Ape Devil)
 Remark: 
 */
-//main secure 002
+
+// dev secure 02.09.23
 
 
-
-<<<<<<< HEAD
-=======
-// dev after merge with pinsConnections
-
-
->>>>>>> dev
 
 
 #include <Arduino.h>
@@ -52,8 +46,6 @@ Remark:
 #include "events.h"
 
 
-<<<<<<< HEAD
-=======
 
 
 //test button
@@ -61,7 +53,6 @@ Remark:
 int bRead;
 
 
->>>>>>> dev
 void setup() {
 
 
