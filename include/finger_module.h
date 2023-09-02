@@ -19,12 +19,24 @@ class Finger_Module {
 
     private:
 
+
+
+
         // declaring inputs and outputs for finger buttons moudule
                                // u1  u2  u3  u4  u5  u6
-        const byte outPin_f[6] = {42, 41, 40, 39, 38, 37}; //declaring output pins for finger buttons moudule
+        const byte outPin_f[6] = {1, 2, 42, 41, 40, 39}; //declaring output pins for finger buttons moudule
 
                                 // j1  j2  j3  j4    
-        const byte inPin_f[4] = {45, 48, 47, 21};  //declaring inputs pins for finger buttons moudule   
+        const byte inPin_f[4] = {38, 37, 36, 35};  //declaring inputs pins for finger buttons moudule   
+
+
+
+        // // declaring inputs and outputs for finger buttons moudule
+        //                        // u1  u2  u3  u4  u5  u6
+        // const byte outPin_f[6] = {42, 41, 40, 39, 38, 37}; //declaring output pins for finger buttons moudule
+
+        //                         // j1  j2  j3  j4    
+        // const byte inPin_f[4] = {45, 48, 47, 21};  //declaring inputs pins for finger buttons moudule   
 
         const byte outPin_f_count = 6;
         const byte inPin_f_count = 4;

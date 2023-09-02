@@ -8,6 +8,12 @@ Remark:
 
 
 
+<<<<<<< HEAD
+=======
+// dev after merge with pinsConnections
+
+
+>>>>>>> dev
 
 
 #include <Arduino.h>
@@ -17,6 +23,9 @@ Remark:
 
 // module to control the Neopixel LEDs
 #include "neopixel-LED.h"
+
+// module to control the ESP-NOW communication
+#include "cat-now.h"
 
 // module to control the layers
 #include "layer_control.h"
@@ -43,12 +52,28 @@ Remark:
 #include "events.h"
 
 
+<<<<<<< HEAD
+=======
+
+
+//test button
+#define pI 46
+int bRead;
+
+
+>>>>>>> dev
 void setup() {
+
+
+  //test buton
+  pinMode(pI, INPUT_PULLUP);
   
   // setting up the cat variant for the communication with the LYNXapp
   config.set_variant();
 
   neopixelled.initialize();
+
+  catnow.initialize();
 
   // set the layer to major-main and initialize the LEDs
   layer_control.initialize();
@@ -85,7 +110,14 @@ void setup() {
 void loop() {
 
 
-  // neopixelled.led_test();
+  bRead = digitalRead(pI);
+  if (bRead == 0) {
+
+    // catnow.test();
+    catnow.scan_for_slave();
+    catnow.send_switch_layer(66);
+  }
+
 
   // checking if the LYNXapp is connected and sends new layouts
   layouts_manager.get_layouts(config.variant);

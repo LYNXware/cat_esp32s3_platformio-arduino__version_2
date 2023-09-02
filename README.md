@@ -12,11 +12,11 @@ The complete project documentation is at: https://www.lynxware.org/
 
 
 ## Circuit
-![Alt Text](images/circuit.webp)
+![Alt Text](readme/circuit.webp)
 
 
 
 ## Software Architecture Diagrams
-![Alt Text](images/SAD.svg)
+![Alt Text](readme/SAD.svg)
 
 
