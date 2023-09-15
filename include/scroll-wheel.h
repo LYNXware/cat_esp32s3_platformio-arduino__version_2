@@ -32,11 +32,10 @@ class Scroll_Wheel {
             #define backward_scroll 43
         #endif
 
-
-        byte value = 0; 
         byte previous_state;  
         byte state;
-        int scroll_value = 0;
+        // byte value = 0; 
+        // int scroll_value = 0;
     
 
 }; 
