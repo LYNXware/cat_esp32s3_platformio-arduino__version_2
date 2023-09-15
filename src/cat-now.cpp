@@ -11,8 +11,6 @@ void CatNow::initialize() {
 
     // set up an Access Point 
     WiFi.softAP(wifi_name + config.variant, "Slave_1_Password", CHANNEL, 0);
-    // WiFi.softAP("testccccc", "Slave_1_Password", CHANNEL, 0);
-    // WiFi.softAP("LYNX-"+config.variant, "Slave_1_Password", CHANNEL, 0);
 
     // Initialize ESP-NOW
     esp_now_init();

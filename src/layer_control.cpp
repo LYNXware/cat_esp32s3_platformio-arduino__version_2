@@ -59,7 +59,7 @@ void Layer_Control::switch_layer_back(char c){
 }
 
 
-// function to switch layer from the outside (second device)
+// function to switch layer from the outside through the cat-now module (second device)
 void Layer_Control::received_layer_switch(u8_t layer){
     active_layer = layer;
     neopixelled.layer_witch(active_layer);
