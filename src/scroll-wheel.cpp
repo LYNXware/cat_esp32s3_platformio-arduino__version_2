@@ -19,22 +19,26 @@ void Scroll_Wheel::initialize(){
 void Scroll_Wheel::read_encoder(){
 
     state = digitalRead(encoder_a);
-        
-    if (state != previous_state){              // we use the encoder_b pin to find out which way we turning.
-        
-        if (digitalRead(encoder_b) != state) {   
-        // Clockwise
-        value ++;
-        scroll_value = 1;
-        event.actuate(forward_scroll);
-        event.deactuate(forward_scroll);
-        } 
-        else {                                 
-        //Counterclockwise
-        value--;
-        scroll_value = -1;
-        event.actuate(backward_scroll);
-        event.deactuate(backward_scroll);           
+
+    if (state != previous_state) {
+        // Check if the rising edge of the encoder signal has occurred
+         // Add a small delay for debouncing
+        // delay(5);
+
+        // if (digitalRead(encoder_a) == state) {
+        if (state == HIGH) {
+            if (digitalRead(encoder_b) != state) {   
+                // Clockwise
+                event.actuate(forward_scroll);
+                event.deactuate(forward_scroll);
+                // delay(1);
+            } 
+            else {                                 
+                // Counterclockwise
+                event.actuate(backward_scroll);
+                event.deactuate(backward_scroll);
+                // delay(1);    
+            }
         }
     } 
     previous_state = state;
