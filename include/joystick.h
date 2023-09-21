@@ -37,7 +37,6 @@ class Joystick {
         
         // declaring the joystick events
                                      //  JF1, JF2, JB1,  JB2,  JL1,  JL2, JR1, JR2
-        // byte joystick_event_map[2][4] = {{33,  34,  35,  36},  {37,  38,  39,  40}};
         byte joystick_event_map[2][4] = {{33,  34,  35,  36},  {39,  40,  37,  38}};
         // state (triggered or not)
         bool joystick_state[2][4] = {{0, 0, 0, 0}, {0, 0, 0, 0}};
@@ -56,13 +55,3 @@ extern Joystick joystick;
 #endif
 
 
-
-        // const byte xl1 = 33;  //JF1
-        // const byte xl2 = 34;  //JF2
-        // const byte xh1 = 35;  //JB1
-        // const byte xh2 = 36;  //JB2
-
-        // const byte yh1 = 37;  //JL1
-        // const byte yh2 = 38;  //JL2
-        // const byte yl1 = 39;  //JR1
-        // const byte yl2 = 40;  //JR2    
